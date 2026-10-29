@@ -1,0 +1,235 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#101426">
+    <title>Tic-Tac-Toe | Play & Move</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <main class="app">
+
+        <!-- Header -->
+        <header class="topbar">
+            <a class="brand" href="/" aria-label="Tic-Tac-Toe home">
+                <span class="brand-icon">✳</span>
+                <span>Tic&nbsp;<span class="brand-accent">Tac&nbsp;</span>Toe&nbsp;</span>
+            </a>
+
+            <div class="toolbar">
+                <button id="themeToggle" class="icon-btn"
+                        aria-label="Switch theme" title="Switch theme">☀️</button>
+
+                <button id="musicToggle" class="icon-btn"
+                        aria-label="Play background music" title="Background music">♫</button>
+
+                <button id="aboutOpen" class="icon-btn"
+                        aria-label="About the developer" title="About the developer">ⓘ</button>
+            </div>
+        </header>
+
+        <!-- Introduction -->
+        <section class="intro">
+            <span class="eyebrow">SIDDARTH GAME PLAY</span>
+            <h1>Make your <span class="gradient-text">next move.</span></h1>
+            <p>Place your marks. Move your pieces. Outsmart your opponent.</p>
+        </section>
+
+        <!-- Game Layout -->
+        <section class="game-layout">
+
+            <div class="game-panel">
+
+                <!-- Current Match -->
+                <div class="game-top">
+                    <div>
+                        <div class="section-label">CURRENT MATCH</div>
+                        <div id="status" class="status">Loading game...</div>
+                    </div>
+
+                    <span id="turnBadge" class="turn-badge">PLAYER X</span>
+                </div>
+
+                <p id="instruction" class="instruction" aria-live="polite">
+                    Preparing the board...
+                </p>
+
+                <!-- Player Indicators -->
+                <div class="players">
+                    <div id="playerX" class="player-chip active">
+                        <span class="x-text">X</span>
+                        <span>Player X</span>
+                    </div>
+
+                    <div id="playerO" class="player-chip">
+                        <span class="o-text">O</span>
+                        <span>Player O</span>
+                    </div>
+                </div>
+
+                <!-- Game Board -->
+                <div id="board" class="board" aria-label="Tic-Tac-Toe board">
+
+                    <button class="cell" data-row="0" data-col="0"
+                            aria-label="Row 1, column 1"></button>
+
+                    <button class="cell" data-row="0" data-col="1"
+                            aria-label="Row 1, column 2"></button>
+
+                    <button class="cell" data-row="0" data-col="2"
+                            aria-label="Row 1, column 3"></button>
+
+                    <button class="cell" data-row="1" data-col="0"
+                            aria-label="Row 2, column 1"></button>
+
+                    <button class="cell" data-row="1" data-col="1"
+                            aria-label="Row 2, column 2"></button>
+
+                    <button class="cell" data-row="1" data-col="2"
+                            aria-label="Row 2, column 3"></button>
+
+                    <button class="cell" data-row="2" data-col="0"
+                            aria-label="Row 3, column 1"></button>
+
+                    <button class="cell" data-row="2" data-col="1"
+                            aria-label="Row 3, column 2"></button>
+
+                    <button class="cell" data-row="2" data-col="2"
+                            aria-label="Row 3, column 3"></button>
+
+                </div>
+
+                <!-- Piece Counts -->
+                <div class="game-bottom">
+                    <div class="piece-count">
+                        <span class="count-mark x-text">X</span>
+                        <span id="countX">0/3 pieces</span>
+                    </div>
+
+                    <div class="piece-count">
+                        <span class="count-mark o-text">O</span>
+                        <span id="countO">0/3 pieces</span>
+                    </div>
+                </div>
+
+                <!-- Restart -->
+                <button id="restart" class="primary-btn">
+                    <span>↻</span> New game
+                </button>
+
+            </div>
+
+            <!-- Sidebar -->
+            <aside class="side-panel">
+
+                <div class="side-card">
+                    <span class="card-icon">♟</span>
+                    <h2>How to play</h2>
+
+                    <ol class="rules">
+                        <li>Players alternate between X and O.</li>
+                        <li>Place your first three pieces in empty cells.</li>
+                        <li>After that, select your own piece and then an empty cell to move it.</li>
+                        <li>Make a line of three horizontally, vertically or diagonally to win.</li>
+                    </ol>
+                </div>
+
+                <!-- Sound Settings -->
+                <div class="side-card sound-card">
+
+                    <div class="sound-heading">
+                        <div>
+                            <h2>Game sounds</h2>
+                            <p>Music &amp; effects</p>
+                        </div>
+
+                        <button id="soundToggle" class="small-toggle"
+                                aria-pressed="true">ON</button>
+                    </div>
+
+                    <label for="volume">Music volume</label>
+
+                    <input id="volume" type="range"
+                           min="0" max="100" value="30">
+
+                    <div class="volume-labels">
+                        <span>Quiet</span>
+                        <span id="volumeValue">30%</span>
+                        <span>Loud</span>
+                    </div>
+
+                </div>
+
+            </aside>
+
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <span>Made for two players</span>
+            <span>Focus · Strategy · Fun</span>
+        </footer>
+
+    </main>
+
+    <!-- Developer Profile Popup -->
+    <div id="aboutModal" class="modal" hidden>
+
+        <div class="modal-backdrop" data-close="true"></div>
+
+        <section class="modal-card"
+                 role="dialog"
+                 aria-modal="true"
+                 aria-labelledby="aboutTitle">
+
+            <button id="aboutClose" class="modal-close"
+                    aria-label="Close developer profile">×</button>
+
+            <div class="profile-photo-wrap">
+                <img id="developerPhoto"
+                     src="images/siddarth.jpg"
+                     alt="Photo of the developer">
+            </div>
+
+            <span class="eyebrow">THE CREATOR</span>
+
+            <h2 id="aboutTitle">Designed &amp; Developed by</h2>
+
+            <p class="developer-name">Siddarth</p>
+
+            <p class="profile-description">
+                A Java full-stack project built with Spring Boot,
+                HTML, CSS and JavaScript.
+            </p>
+
+            <button id="aboutDone" class="primary-btn">
+                Back to game
+            </button>
+
+        </section>
+    </div>
+
+    <!-- Audio Assets -->
+    <audio id="backgroundAudio"
+           src="audio/background.mp3"
+           loop preload="none"></audio>
+
+    <audio id="placeAudio"
+           src="audio/place.mp3"
+           preload="none"></audio>
+
+    <audio id="moveAudio"
+           src="audio/move.mp3"
+           preload="none"></audio>
+
+    <audio id="winAudio"
+           src="audio/win.mp3"
+           preload="none"></audio>
+
+    <!-- JavaScript -->
+    <script src="script.js"></script>
+
+</body>
+</html>
